@@ -57,7 +57,20 @@ const StepTwo: React.FC<StepTwoProps> = ({ interest, onBack, onSubmit }) => {
       </TextField>
       <FormControlLabel
         control={<Checkbox {...register('terms', { required: true })} />}
-        label="I agree to the terms and conditions"
+        label={
+          <span>
+          I accept the{' '}
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+            style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
+          >
+            Terms and Conditions
+          </a>
+        </span>
+        }
       />
       {errors.terms && <p style={{color:'#d32f2f',fontSize:'12px'}}>&emsp;Terms and conditions must be accepted</p>}<br/>
       <Button onClick={onBack} variant="outlined"disabled={isSubmitting}>Back</Button>

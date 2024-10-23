@@ -15,16 +15,12 @@ interface StepOneProps {
 }
 
 const StepOne: React.FC<StepOneProps> = ({ onNext, defaultValues }) => {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<StepOneData>({
+  const { register, handleSubmit, formState: { errors } } = useForm<StepOneData>({
     defaultValues
   });
 
   const onSubmit = (data: StepOneData) => {
     onNext(data);
-  };
-
-  const handleInterestChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('interest', event.target.value);  // Set the selected interest in form state
   };
 
   return (
@@ -60,7 +56,7 @@ const StepOne: React.FC<StepOneProps> = ({ onNext, defaultValues }) => {
       />
       <FormControl component="fieldset" error={Boolean(errors.interest)}>
         <FormLabel component="legend">Interest</FormLabel>
-        <RadioGroup row onChange={handleInterestChange}>
+        <RadioGroup row defaultValue={defaultValues.interest}>
           <FormControlLabel value="Cars" control={<Radio {...register('interest', { required: 'Please select an interest' })} />} label="Cars" />
           <FormControlLabel value="Music" control={<Radio {...register('interest', { required: 'Please select an interest' })} />} label="Music" />
           <FormControlLabel value="Sport" control={<Radio {...register('interest', { required: 'Please select an interest' })} />} label="Sport" />
